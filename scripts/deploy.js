@@ -9,6 +9,10 @@ const main = async () => {
     ],
     [500, 200, 150], // HP values
     [100, 50, 25], // Attack damage values
+    'Klaus', // Boss name
+    'https://i.imgur.com/bz2dA1B.png', // Boss image
+    10000, // Boss hp
+    50, // Boss attack damage
   )
   await gameContract.deployed()
   console.log('Contract deployed to:', gameContract.address)

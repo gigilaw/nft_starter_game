@@ -39,17 +39,38 @@ contract MyEpicGame is ERC721 {
   // to store the owner of the NFT and reference it later.
   mapping(address => uint256) public nftHolders;
 
+  struct BigBoss {
+    string name;
+    string imageURI;
+    uint hp;
+    uint maxHp;
+    uint attackDamage;
+  }
+  
+  BigBoss public bigBoss;
+
   constructor(
     string[] memory characterNames,
     string[] memory characterImageURIs,
     uint[] memory characterHp,
-    uint[] memory characterAttackDmg
-    // Below, you can also see I added some special identifier symbols for our NFT.
-    // This is the name and symbol for our token, ex Ethereum and ETH. I just call mine
-    // Heroes and HERO. Remember, an NFT is just a token!
+    uint[] memory characterAttackDmg,
+    string memory bossName,
+    string memory bossImageURI,
+    uint bossHp,
+    uint bossAttackDamage
   )
+
     ERC721("Heroes", "HERO")
   {
+      bigBoss = BigBoss({
+        name: bossName,
+        imageURI: bossImageURI,
+        hp: bossHp,
+        maxHp: bossHp,
+        attackDamage: bossAttackDamage
+    });
+    console.log("Done initializing boss %s w/ HP %s, img %s", bigBoss.name, bigBoss.hp, bigBoss.imageURI);
+    
     for(uint i = 0; i < characterNames.length; i += 1) {
       defaultCharacters.push(CharacterAttributes({
         characterIndex: i,
